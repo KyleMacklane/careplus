@@ -14,7 +14,7 @@ export default withSentryConfig(withSentryConfig(nextConfig, {
 // https://github.com/getsentry/sentry-webpack-plugin#options
 
 org: "javascript-mastery-dk",
-project: "care-pulse",
+project: "care-plus",
 
 // Only print logs for uploading source maps in CI
 silent: !process.env.CI,
