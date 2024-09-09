@@ -1,0 +1,17 @@
+# POST http://localhost:3000/api/routes/login
+# Content-Type: application/json
+# {
+#     "FullName": "isa",
+#     "username":"isa",
+#     "phone":"123",
+#     "avatar":"www",
+#     "password":"12345",
+#     "confirmpass"
+# }
+
+GET http://localhost:3000/api/auth/login
+Content-Type:  application/json
+{
+    "username":"Macklane",
+    "password":"pass123"
+}

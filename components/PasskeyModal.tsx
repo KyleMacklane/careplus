@@ -35,18 +35,19 @@ export const PasskeyModal = () => {
   useEffect(() => {
     const accessKey = encryptedKey && decryptKey(encryptedKey);
 
-    if (path)
+    if (path) {
       if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY!.toString()) {
         setOpen(false);
-        router.push("/admin");
+        router.push("/appointment/admin");  // Updated path
       } else {
         setOpen(true);
       }
-  }, [encryptedKey]);
+    }
+  }, [encryptedKey, path, router]);
 
   const closeModal = () => {
     setOpen(false);
-    router.push("/");
+    router.push("/");  // You may want to keep this to redirect to the homepage on modal close
   };
 
   const validatePasskey = (
@@ -60,6 +61,7 @@ export const PasskeyModal = () => {
       localStorage.setItem("accessKey", encryptedKey);
 
       setOpen(false);
+      router.push("/appointmen/admin");  // Ensure this is called after setting the key
     } else {
       setError("Invalid passkey. Please try again.");
     }
