@@ -36,13 +36,20 @@ export function DataTable<TData, TValue>({
       ? window.localStorage.getItem("accessKey")
       : null;
 
-  useEffect(() => {
-    const accessKey = encryptedKey && decryptKey(encryptedKey);
-
-    if (accessKey !== process.env.NEXT_PUBLIC_ADMIN_PASSKEY!.toString()) {
-      redirect("/");
-    }
-  }, [encryptedKey]);
+      useEffect(() => {
+        // Only run this effect if localStorage is available and the key is present
+        if (!encryptedKey) return;
+      
+        const accessKey = decryptKey(encryptedKey);
+      
+        // Check if accessKey matches the admin passkey from environment variables
+        if (accessKey !== process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
+          redirect("/"); // Redirect only if the passkey is incorrect
+        }
+      }, [encryptedKey]);
+      
+    
+  
 
   const table = useReactTable({
     data,
