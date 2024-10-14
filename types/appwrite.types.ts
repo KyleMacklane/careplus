@@ -36,6 +36,7 @@ export interface Appointment extends Models.Document {
 }
 
 
+
 // export interface AppointmentDocument extends Models.Document  {
 //   patientId: string;
 //   appointmentDate: string;

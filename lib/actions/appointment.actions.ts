@@ -161,3 +161,24 @@ export const getAppointment = async (appointmentId: string) => {
     );
   }
 };
+
+//GET APPOINTMENTS BY DATE
+
+export const getAppointmentsByDate = async (date: string) => {
+  try {
+    const response = await databases.listDocuments(
+      DATABASE_ID!,
+      APPOINTMENT_COLLECTION_ID!,
+      [
+        `schedule=${date}` // Correct query format for Appwrite
+      ]
+    );
+
+    // Parse and return the appointments
+    return response.documents;
+  } catch (error) {
+    console.error('Error fetching appointments by date:', error);
+    throw error;
+  }
+};
+

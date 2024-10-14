@@ -1,0 +1,17 @@
+@media print{
+    .print:hidden{
+        display: none;
+    }
+    /* header, footer {
+        display: none !important;
+      } */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    
+      /* Adjust the table for printing */
+      .admin-stat {
+        page-break-inside: avoid;
+      }
+}

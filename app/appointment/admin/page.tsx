@@ -1,13 +1,34 @@
+"use client"; // This makes the component a Client Component
+
 import Image from "next/image";
 import Link from "next/link";
-
+import { useState, useEffect } from "react";
 import { StatCard } from "@/components/StatCard";
 import { columns } from "@/components/table/columns";
 import { DataTable } from "@/components/table/DataTable";
 import { getRecentAppointmentList } from "@/lib/actions/appointment.actions";
+import './admin.css'
 
-const AdminPage = async () => {
-  const appointments = await getRecentAppointmentList();
+
+const AdminPage = () => {
+  const [appointments, setAppointments] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      const data = await getRecentAppointmentList();
+      setAppointments(data);
+    };
+
+    fetchAppointments();
+  }, []);
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  if (!appointments) {
+    return <p>Loading, please wait...</p>; // Fallback while appointments are loading
+  }
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
@@ -21,13 +42,16 @@ const AdminPage = async () => {
             className="h-8 w-fit"
           />
         </Link>
-
-        <p className="text-16-semibold">Admin Dashboard</p>
+        <p className="text-16-semibold  print:hidden">Admin Dashboard</p>
       </header>
 
-      <main className="admin-main">
-        <section className="w-full space-y-4">
-          <h1 className="header">Welcome 👋</h1>
+      <button onClick={handlePrint} className="btn-primary print:hidden">
+        Print Report
+      </button>
+
+      <main className="admin-main ">
+        <section className="w-full space-y-4  print:hidden">
+          <h1 className="header print:hidden">Welcome 👋</h1>
           <p className="text-dark-700">
             Start the day with managing new appointments
           </p>
